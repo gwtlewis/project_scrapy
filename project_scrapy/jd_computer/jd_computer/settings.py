@@ -16,7 +16,7 @@ NEWSPIDER_MODULE = 'jd_computer.spiders'
 
 USER_AGENT = 'Mozilla/5.0 (X11; Linux x86_64; rv:7.0.1) Gecko/20100101 Firefox/7.7'
 
-MONGODB_SERVER = '127.0.0.1'
+MONGODB_SERVER = '118.89.48.117'
 MONGODB_PORT = 27017
 MONGODB_DB = 'Douban'
 MONGODB_COLLECTION = 'jd_computer'
