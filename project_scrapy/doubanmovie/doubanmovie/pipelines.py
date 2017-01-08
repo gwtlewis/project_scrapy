@@ -20,8 +20,8 @@ class DoubanmoviePipeline(object):
         #db = connection[settings['MONGODB_DB']]
         #self.collection = db[settings['MONGODB_COLLECTION']]
         self.client = pymongo.MongoClient(host=settings['MONGODB_HOST'], port=settings['MONGODB_PORT'])
-        self.client.admin.authenticate(settings['MONGODB_USER'], settings['MONGODB_PSW'])
         self.db = self.client[settings['MONGODB_DB']]
+        self.db.authenticate(name=settings['MONGODB_USER'], password=settings['MONGODB_PSW'])
         self.collection = self.db[settings['MONGODB_COLLECTION']]
 
     def process_item(self, item, spider):
