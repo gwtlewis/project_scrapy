@@ -13,11 +13,10 @@ from items import DoubanmovieItem
 class DoubanmoviePipeline(object):
     def __init__(self):
         connection = pymongo.MongoClient(
-            settings['MONGODB_USERNAME'],
-            settings['MONGODB_PASSWORD'],
             settings['MONGODB_SERVER'],
             settings['MONGODB_PORT']
         )
+        connection.admin.authenticate(settings['MONGODB_USER'], settings['MONGODB_PSW'])
         db = connection[settings['MONGODB_DB']]
         self.collection = db[settings['MONGODB_COLLECTION']]
 
