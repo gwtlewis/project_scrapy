@@ -16,7 +16,7 @@ class JavaScriptMiddleware(object):
     def process_request(self, request, spider):
         if spider.name == "computers" :
             print ("PhantomJS is starting...")
-            driver = webdriver.PhantomJS(executable_path='/Development enviroment/phantomjs-2.1.1-macosx/bin/phantomjs')  # 指定浏览器
+            driver = webdriver.PhantomJS()  # 指定浏览器
             driver.get(request.url)
             time.sleep(1)
             js = "var q=document.documentElement.scrollTop=10000"
