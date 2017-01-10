@@ -6,6 +6,27 @@
 # http://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
 from scrapy import signals
+from selenium import webdriver
+from scrapy.http import HtmlResponse
+import time
+
+
+class JavaScriptMiddleware(object):
+
+    def process_request(self, request, spider):
+        if spider.name == "computers" :
+            print ("PhantomJS is starting...")
+            driver = webdriver.PhantomJS(executable_path='/Development enviroment/phantomjs-2.1.1-macosx/bin/phantomjs')  # 指定浏览器
+            driver.get(request.url)
+            time.sleep(1)
+            js = "var q=document.documentElement.scrollTop=10000"
+            driver.execute_script(js)  # 模仿用户操作，把页面拉倒最底端
+            time.sleep(3)
+            body = driver.page_source
+            print ("The PhantomJS is visiting "+request.url)
+            return HtmlResponse(driver.current_url, body=body, encoding='utf-8', request=request)
+        else:
+            return
 
 
 class JdComputerSpiderMiddleware(object):

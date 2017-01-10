@@ -26,11 +26,11 @@ ITEM_PIPELINES = {
     'doubanmovie.pipelines.DoubanmoviePipeline': 300,
 }
 
-#MongoDB Connection
+# MongoDB Connection
 MONGODB_HOST = '118.89.48.117'
-MONGODB_PORT = 27017
-MONGODB_USER = 'DBoperator'
-MONGODB_PSW = 'test'
+MONGODB_PORT = 27027
+MONGODB_USER = 'dbOwner'
+MONGODB_PSW = 'Db1419'
 MONGODB_DB = 'Douban'
 MONGODB_COLLECTION = 'movies'
 

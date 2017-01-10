@@ -6,22 +6,20 @@
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 import pymongo
 from scrapy.conf import settings
-from jd_computer.items import JdComputerItem
+from items import JdComputerItem
 from scrapy import log
 
 
 class JdComputerPipeline(object):
     def __init__(self):
-        connection = pymongo.MongoClient(
-            settings['MONGODB_SERVER'],
-            settings['MONGODB_PORT']
-        )
         try:
+            connection = pymongo.MongoClient(host=settings['MONGODB_SERVER'], port=settings['MONGODB_PORT'])
             db = connection[settings['MONGODB_DB']]
+            db.authenticate(name=settings['MONGODB_USER'], password=settings['MONGODB_PWD'])
             self.connection = db[settings['MONGODB_COLLECTION']]
             print("MonoDB connection established...")
         except Exception as e:
-            print("An exception occurred: "+e.__str__())
+            print("An exception occurred when try to connect to MongoDB: "+e.__str__())
 
     def process_item(self, item, spider):
         computer = dict(item)

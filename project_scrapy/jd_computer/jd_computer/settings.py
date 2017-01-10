@@ -17,12 +17,19 @@ NEWSPIDER_MODULE = 'jd_computer.spiders'
 USER_AGENT = 'Mozilla/5.0 (X11; Linux x86_64; rv:7.0.1) Gecko/20100101 Firefox/7.7'
 
 MONGODB_SERVER = '118.89.48.117'
-MONGODB_PORT = 27017
+MONGODB_PORT = 27027
 MONGODB_DB = 'Douban'
+MONGODB_USER = 'dbOwner'
+MONGODB_PWD = 'Db1419'
 MONGODB_COLLECTION = 'jd_computer'
 
 ITEM_PIPELINES = {
     'jd_computer.pipelines.JdComputerPipeline': 300,
+}
+
+DOWNLOADER_MIDDLEWARES = {
+    'jd_computer.middlewares.middlewares.JavaScriptMiddleware': 543,  # 键位中间件类的路径，值为中间件的顺序
+    'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,  # 禁用内置的中间件
 }
 
 #LOG_FILE='/var/log/scrapy_logs/jd_computer_console.log'
@@ -39,7 +46,7 @@ ROBOTSTXT_OBEY = False
 # Configure a delay for requests for the same website (default: 0)
 # See http://scrapy.readthedocs.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-DOWNLOAD_DELAY = 2
+DOWNLOAD_DELAY = 1
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16
