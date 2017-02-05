@@ -15,29 +15,28 @@ class CoumputerSpider(CrawlSpider):
         item = JdComputerItem()
         selector = Selector(response)
         computers = selector.xpath('//div[@id="plist"]/ul/li/div')
-        count = 0
         for eachComputer in computers:
             prd_name = eachComputer.xpath('div[@class="p-name"]/a/em/text()').extract()
             if prd_name:
                 prd_sku = eachComputer.xpath('@data-sku').extract()
                 prd_price = eachComputer.xpath('div[@class="p-price"]/strong[@class="J_price"]/i/text()').extract()
                 prd_img_src = eachComputer.xpath('div[@class="p-img"]/a/img/@src').extract()
+                prd_url = eachComputer.xpath('div[@class="p-name"]/a/@href').extract()
             else:
                 prd_sku = eachComputer.xpath('div/div[2]/div[1]/@data-sku').extract()
                 prd_name = eachComputer.xpath('div/div[2]/div[1]/div[@class="p-name"]/a/em/text()').extract()
                 prd_price = eachComputer.xpath('div/div[2]/div[1]/div[@class="p-price"]/strong[@class="J_price"]/i/'
                                                'text()').extract()
                 prd_img_src = eachComputer.xpath('div/div[2]/div[1]/div[@class="p-img"]/a/img/@src').extract()
-            if prd_img_src:
-                item['prd_img_src'] = 'http'+prd_img_src[0]
-            else:
-                item['prd_img_src'] = 'null'
+                prd_url = eachComputer.xpath('div/div[2]/div[1]/div[@class="p-name"]/a/@href').extract()
+            item['prd_img_src'] = 'https:'+prd_img_src[0]
             item['prd_name'] = prd_name[0]
             item['prd_sku'] = prd_sku[0]
             item['prd_price'] = prd_price[0]
+            item['prd_url'] = 'https:'+prd_url[0]
             yield item
 
-            # nextlink = selector.xpath('//a[@class="pn-next"]/@href').extract()
-            # if nextlink:
-            #    nextlink = nextlink[0]
-            #    yield Request(self.url+nextlink, callback=self.parse)
+            nextlink = selector.xpath('//a[@class="pn-next"]/@href').extract()
+            if nextlink:
+               nextlink = nextlink[0]
+               yield Request(self.url+nextlink, callback=self.parse)

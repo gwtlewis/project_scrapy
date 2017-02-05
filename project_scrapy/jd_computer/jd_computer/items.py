@@ -15,3 +15,4 @@ class JdComputerItem(scrapy.Item):
     prd_name = Field()
     prd_price = Field()
     prd_img_src = Field()
+    prd_url = Field()
