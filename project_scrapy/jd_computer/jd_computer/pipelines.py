@@ -19,7 +19,7 @@ class JdComputerPipeline(object):
             self.connection = db[settings['MONGODB_COLLECTION']]
             print("MonoDB connection established...")
         except Exception as e:
-            print("An exception occurred when try to connect to MongoDB: "+e.__str__())
+            print("An exception occurred when try to connect to MongoDB: "+str(e))
 
     def process_item(self, item, spider):
         computer = dict(item)

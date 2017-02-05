@@ -8,6 +8,9 @@
 #     http://doc.scrapy.org/en/latest/topics/settings.html
 #     http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 #     http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
+import datetime
+
+now = datetime.datetime.now()
 
 BOT_NAME = 'jd_computer'
 
@@ -21,7 +24,7 @@ MONGODB_PORT = 27027
 MONGODB_DB = 'Douban'
 MONGODB_USER = 'dbOwner'
 MONGODB_PWD = 'Db1419'
-MONGODB_COLLECTION = 'jd_computer'
+MONGODB_COLLECTION = 'test_'+now.strftime("%Y%m%d")
 
 ITEM_PIPELINES = {
     'jd_computer.pipelines.JdComputerPipeline': 300,

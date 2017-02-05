@@ -14,13 +14,14 @@ import time
 class JavaScriptMiddleware(object):
 
     def process_request(self, request, spider):
-        if spider.name == "computers" :
+        if spider.name == "computers":
             print ("PhantomJS is starting...")
             driver = webdriver.PhantomJS()  # 指定浏览器
             driver.get(request.url)
+            driver.set_window_size(1000, 10000)
             time.sleep(1)
-            js = "var q=document.documentElement.scrollTop=10000"
-            driver.execute_script(js)  # 模仿用户操作，把页面拉倒最底端
+            js1 = "var q=document.documentElement.scrollTop=5000"
+            driver.execute_script(js1)  # 模仿用户操作
             time.sleep(3)
             body = driver.page_source
             print ("The PhantomJS is visiting "+request.url)

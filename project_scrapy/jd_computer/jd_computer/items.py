@@ -11,6 +11,7 @@ from scrapy import Item, Field
 class JdComputerItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
+    prd_sku = Field()
     prd_name = Field()
     prd_price = Field()
     prd_img_src = Field()
