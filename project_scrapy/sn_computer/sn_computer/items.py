@@ -8,7 +8,7 @@
 import scrapy
 from scrapy import Item, Field
 
-class JdComputerItem(scrapy.Item):
+class SnComputerItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
     prd_brand = Field()
@@ -23,5 +23,3 @@ class JdComputerItem(scrapy.Item):
     prd_img = Field()
     good_rate = Field()
     prd_id = Field()
-    prd_seller = Field()
-    comparable = Field()

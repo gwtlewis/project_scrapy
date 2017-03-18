@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Scrapy settings for jd_computer project
+# Scrapy settings for gm_computer project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -12,10 +12,10 @@ import datetime
 
 now = datetime.datetime.now()
 
-BOT_NAME = 'jd_computer'
+BOT_NAME = 'gm_computer'
 
-SPIDER_MODULES = ['jd_computer.spiders']
-NEWSPIDER_MODULE = 'jd_computer.spiders'
+SPIDER_MODULES = ['gm_computer.spiders']
+NEWSPIDER_MODULE = 'gm_computer.spiders'
 
 USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_3) AppleWebKit/536.5 (KHTML, like Gecko) Chrome/19.0.1084.54 Safari/536.5'
 
@@ -24,21 +24,19 @@ MONGODB_PORT = 27027
 MONGODB_DB = 'Douban'
 MONGODB_USER = 'dbOwner'
 MONGODB_PWD = 'Db1419'
-MONGODB_COLLECTION = 'jd_computers_'+now.strftime("%Y%m%d")
+MONGODB_COLLECTION = 'gm_computers_'+now.strftime("%Y%m%d")
 
 ITEM_PIPELINES = {
-    'jd_computer.pipelines.JdComputerPipeline': 300,
+    'gm_computer.pipelines.GmComputerPipeline': 300,
 }
 
 DOWNLOADER_MIDDLEWARES = {
-    'jd_computer.middlewares.middlewares.JavaScriptMiddleware': 543,  # 键位中间件类的路径，值为中间件的顺序
+    'gm_computer.middlewares.JavaScriptMiddleware': 543,
     'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,  # 禁用内置的中间件
 }
 
-#LOG_FILE='/var/log/scrapy_logs/jd_computer_console.log'
-
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'jd_computer (+http://www.yourdomain.com)'
+#USER_AGENT = 'gm_computer (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
@@ -49,7 +47,7 @@ ROBOTSTXT_OBEY = False
 # Configure a delay for requests for the same website (default: 0)
 # See http://scrapy.readthedocs.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-# DOWNLOAD_DELAY = 1
+#DOWNLOAD_DELAY = 3
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16
@@ -69,13 +67,13 @@ ROBOTSTXT_OBEY = False
 # Enable or disable spider middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'jd_computer.middlewares.JdComputerSpiderMiddleware': 543,
+#    'gm_computer.middlewares.GmComputerSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-#    'jd_computer.middlewares.MyCustomDownloaderMiddleware': 543,
+#    'gm_computer.middlewares.MyCustomDownloaderMiddleware': 543,
 #}
 
 # Enable or disable extensions
@@ -86,6 +84,9 @@ ROBOTSTXT_OBEY = False
 
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
+#ITEM_PIPELINES = {
+#    'gm_computer.pipelines.SomePipeline': 300,
+#}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html

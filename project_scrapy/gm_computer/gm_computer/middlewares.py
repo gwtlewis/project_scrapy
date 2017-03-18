@@ -14,7 +14,7 @@ import time
 
 class JavaScriptMiddleware(object):
     def process_request(self, request, spider):
-        if spider.name == "computers":
+        if spider.name == "gm_computers":
             driver = webdriver.PhantomJS()  # 指定浏览器
             wait = ui.WebDriverWait(driver, 15)
             print ("PhantomJS is starting...")
@@ -23,11 +23,12 @@ class JavaScriptMiddleware(object):
             js1 = "var q=document.documentElement.scrollTop=5000"
             driver.execute_script(js1)  # 模仿用户操作
             time.sleep(1)
-            wait.until(lambda driver: driver.find_element_by_xpath('//*[@id="detail"]/div[1]/ul/li[5]'))
-            driver.find_element_by_xpath('//*[@id="detail"]/div[1]/ul/li[5]').click()
-            wait.until(lambda driver: driver.find_element_by_xpath('//*[@id="comment"]/div[2]/div[1]/div[1]/div'))
+            driver.find_element_by_xpath('//*[@id="prd_tbox"]/li[3]/a').click()
+            driver.find_element_by_xpath('//*[@id="prd_tbox"]/li[2]/a').click()
+            wait.until(lambda driver: driver.find_element_by_xpath('//*[@id="j-comment-section"]/div/div[1]/div[1]/'
+                                                                   'div[1]/span'))
             body = driver.page_source
-            print ("The PhantomJS is visiting "+request.url)
+            print ("PhantomJS is visiting "+request.url)
             return HtmlResponse(driver.current_url, body=body, encoding='utf-8', request=request)
             driver.close()
             print ("PhantomJS closed")
@@ -35,7 +36,7 @@ class JavaScriptMiddleware(object):
             return
 
 
-class JdComputerSpiderMiddleware(object):
+class GmComputerSpiderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
     # scrapy acts as if the spider middleware does not modify the
     # passed objects.

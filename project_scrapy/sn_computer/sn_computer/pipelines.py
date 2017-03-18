@@ -6,10 +6,11 @@
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 import pymongo
 from scrapy.conf import settings
+from items import SnComputerItem
 from scrapy import log
 
 
-class JdComputerPipeline(object):
+class SnComputerPipeline(object):
     def __init__(self):
         try:
             connection = pymongo.MongoClient(host=settings['MONGODB_SERVER'], port=settings['MONGODB_PORT'])
@@ -26,3 +27,4 @@ class JdComputerPipeline(object):
         log.msg("Computers added to MongoDB database", _level=log.INFO, spider=spider)
 
         return item
+

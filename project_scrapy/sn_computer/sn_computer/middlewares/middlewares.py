@@ -5,32 +5,33 @@
 # See documentation in:
 # http://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
-from scrapy import signals, log
+from scrapy import signals
 from selenium import webdriver
 from scrapy.http import HtmlResponse
+from selenium.webdriver.support import ui
 import time
 
 
 class JavaScriptMiddleware(object):
-
     def process_request(self, request, spider):
-        if spider.name == "computers":
-            print ("PhantomJS is starting...")
+        if spider.name == "sn_computers":
             driver = webdriver.PhantomJS()  # 指定浏览器
-            driver.get(request.url)
+            print ("PhantomJS is starting...")
+            wait = ui.WebDriverWait(driver, 15)
             driver.set_window_size(1000, 10000)
-            time.sleep(1)
-            js1 = "var q=document.documentElement.scrollTop=5000"
+            driver.get(request.url)
+            js1 = "var q=document.documentElement.scrollTop=100"
             driver.execute_script(js1)  # 模仿用户操作
-            time.sleep(3)
+            time.sleep(1)
+            driver.find_element_by_xpath('//*[@id="productParTitle"]').click()
+            wait.until(lambda driver: driver.find_element_by_xpath('//*[@id="mainPrice"]//span[@class="mainprice"]'))
             body = driver.page_source
-            print ('The PhantomJS is visiting url: '+request.url)
+            print ("The PhantomJS is visiting "+request.url)
             return HtmlResponse(driver.current_url, body=body, encoding='utf-8', request=request)
         else:
             return
 
-
-class GetJdComputerLinkSpiderMiddleware(object):
+class SnComputerSpiderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
     # scrapy acts as if the spider middleware does not modify the
     # passed objects.

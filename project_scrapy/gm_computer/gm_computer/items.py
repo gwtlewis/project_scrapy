@@ -5,12 +5,10 @@
 # See documentation in:
 # http://doc.scrapy.org/en/latest/topics/items.html
 
-import scrapy
-from scrapy import Item, Field
+from scrapy import Field, Item
 
-class JdComputerItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
+
+class GmComputerItem(Item):
     prd_brand = Field()
     prd_name = Field()
     prd_price = Field()
