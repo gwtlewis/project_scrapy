@@ -20,7 +20,7 @@ class CoumputerSpider(CrawlSpider):
     for url in collection.find({}):
         url_list.append(url['url'].encode("utf-8"))
 
-    i = 0
+    i = 2
     start_urls = [url_list[i]]
     allowed_domains = ["jd.com"]
 

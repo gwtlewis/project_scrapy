@@ -34,9 +34,9 @@ class ComputerSpider(CrawlSpider):
         selector = Selector(response)
         item['prd_seller'] = 'gm'
         if (self.i + 1) in self.comparable:
-            item['compaarable'] = True
+            item['comparable'] = True
         else:
-            item['compaarable'] = False
+            item['comparable'] = False
         item['prd_brand'] = selector.xpath(u'//*[@id="prd_data"]/li[2]/ul[1]/li/span[contains(text(), "品牌")]/'
                                            u'../span[2]/text()').extract()[0]
         item['prd_name'] = selector.xpath('//*[@id="prd_data"]/li[1]/div[1]/div[1]/@title').extract()[0]
@@ -68,8 +68,12 @@ class ComputerSpider(CrawlSpider):
             item['prd_cpu'] = cpu2[0]
         else:
             item['prd_cpu'] = 'unknown'
-        item['prd_disk'] = selector.xpath(u'//*[@id="prd_data"]/li[2]/ul[1]/li/span[contains(text(), "硬盘")]/'
-                                          u'../span[2]/text()').extract()[0]
+        prd_disk = selector.xpath(u'//*[@id="prd_data"]/li[2]/ul[1]/li/span[contains(text(), "硬盘")]/'
+                                  u'../span[2]/text()').extract()
+        if prd_disk:
+            item['prd_disk'] = prd_disk[0]
+        else:
+            item['prd_disk'] = '无'
         type = selector.xpath(u'//*[@id="prd_data"]/li[2]/ul[1]/li/span[contains(text(), "适用")]/../span[2]/text()').extract()
         if type:
             item['prd_type'] = type[0]
