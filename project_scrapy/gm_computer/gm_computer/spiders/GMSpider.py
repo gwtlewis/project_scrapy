@@ -23,7 +23,7 @@ class ComputerSpider(CrawlSpider):
     for url in collection.find({}):
         url_list.append(url['url'].encode("utf-8"))
 
-    i = 0
+    i = 49
     start_urls = [url_list[i]]
     allowed_domains = ["gome.com.cn"]
 
